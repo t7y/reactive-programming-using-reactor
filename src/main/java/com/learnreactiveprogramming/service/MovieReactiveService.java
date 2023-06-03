@@ -36,13 +36,15 @@ public class MovieReactiveService {
 
     public Flux<Movie> getAllMovies() {
 
+        // get all movies
         var movieInfoFlux = movieInfoService.retrieveMoviesFlux();
 
         var movies = movieInfoFlux
                 .flatMap((movieInfo -> {
+                    // for each movie, get reviews
                     Mono<List<Review>> reviewsMono =
                             reviewService.retrieveReviewsFlux(movieInfo.getMovieInfoId())
-                                    .collectList();
+                                    .collectList(); // turn Flux<Review> into Mono<List<Review>>
                     return reviewsMono
                             .map(reviewList -> new Movie(movieInfo, reviewList));
                 }))

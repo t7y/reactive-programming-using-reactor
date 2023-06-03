@@ -8,7 +8,7 @@ public class ImperativeExample {
     public static List<String> namesGreaterThanSize(List<String> namesList, int size){
         var newNamesList = new ArrayList<String>();
         for(String name : namesList){
-            if(name.length()>size && !newNamesList.contains(name))
+            if(name.length() > size && !newNamesList.contains(name))
                 //newNamesList.add(name.toUpperCase());
             newNamesList.add(name);
         }
